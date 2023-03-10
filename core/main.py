@@ -76,7 +76,9 @@ for image_name in image_name_list:
         print(image_name)
         print(f"Pred: {hero_name_pred}")
         
-    string_write_to_output += f"{image_name} {hero_name_pred}\n"
+    # print("Similarity: ", similarity_list[hero_name_pred][0][0])
+        
+    string_write_to_output += f"{image_name} {hero_name_pred} {similarity_list[hero_name_pred][0][0]:.4f}\n"
     
     if hero_name_pred == hero_name_true:
         number_true_image_top1 += 1

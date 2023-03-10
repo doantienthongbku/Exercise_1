@@ -33,7 +33,6 @@ model.fc = nn.Linear(512, 64)
 for param in model.fc.parameters():
     param.requires_grad = True
 
-# AdmS_criterion, CE_criterion = define_loss()
 criterion = nn.CrossEntropyLoss()
 
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
