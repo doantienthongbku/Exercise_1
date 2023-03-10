@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import torchvision.models as models
 from data import HeroImage
+import matplotlib.pyplot as plt
 
 from torchvision.datasets import ImageFolder
 import torchvision.transforms as transforms
@@ -48,6 +49,8 @@ def calculate_accuracy(outputs_list, targets_list):
     return acc
 
 best_acc = 0.0
+loss_epoch_list = []
+acc_epoch_list = []
 
 for epoch in range(300):
     losses = []
@@ -68,6 +71,7 @@ for epoch in range(300):
             print(f"Epoch [{epoch}/{300}] Batch {batch_idx}/{len(train_loader)} Loss: {loss.item():.4f}")
             
     print(f"Epoch [{epoch}/{300}] Average Loss: {sum(losses)/len(losses):.4f}")
+    loss_epoch_list.append(sum(losses)/len(losses))
             
     scheduler.step()
     
@@ -85,12 +89,24 @@ for epoch in range(300):
             
         train_acc = calculate_accuracy(outputs_list, targets_list)
         print(f"Train accuracy: {train_acc:.4f}")
+        acc_epoch_list.append(train_acc)
             
         # save model if it has the best accuracy
         if train_acc > best_acc:
             best_acc = train_acc
             torch.save(model.state_dict(), 'best_model_state.pth')
             print(f"Saved model with accuracy: {train_acc:.4f}")
-            
+
+print("=============================================")  
 print("Best accuracy: ", best_acc)
 
+# Save figure containing loss and accuracy
+plt.figure()
+plt.plot(loss_epoch_list, label='loss')
+plt.legend()
+plt.savefig('loss.png')
+
+plt.figure()
+plt.plot(acc_epoch_list, label='accuracy')
+plt.legend()
+plt.savefig('acc.png')
