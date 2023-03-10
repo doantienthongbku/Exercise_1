@@ -59,8 +59,8 @@ Step 2: go on terminal and type `python3 train.py`
 Step 1: go to `core` folder
 
 Step 2: modity `main.py` with 2 params:
-- `LABEL_DIR` : label of test images with format like `test_data/test.txt, if NOT, set `LABEL_DIR = ""`\
-- `TEST_IMAGE_DIR` : folder contain all test images. \
+- `LABEL_DIR` : label of test images with format like `test_data/test.txt`, if NOT, set `LABEL_DIR = ""`
+- `TEST_IMAGE_DIR` : folder contain all test images.
 
 By default:
 ```
